@@ -1,0 +1,167 @@
+/* Reset and Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: black;
+    color: white;
+}
+
+/* Header Styles */
+header {
+    background-color: rgb(9, 9, 44);
+    padding: 10px; /* Reduced padding for a smaller header */
+    text-align: center;
+}
+
+/* Navigation Styles */
+nav {
+    background-color: darkpurple;
+    padding: 10px;
+    text-align: center;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    margin: 10px;
+    transition: border-bottom 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+    border-bottom: 2px solid white;
+}
+
+/* Animation Container Styles */
+#animation-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    overflow: hidden;
+}
+
+.centered-content {
+    text-align: center;
+}
+
+.centered-content h1 {
+    font-size: 2em;
+}
+
+.centered-content p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+/* Animation Styles */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.centered-content {
+    animation: fadeInUp 1s ease-in-out;
+}
+
+/* Background Image */
+body {
+    background-image: url('https://wallpaperaccess.com/full/4167709.gif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Form Container Styles */
+.form-container {
+    max-width: 500px;
+    margin: auto;
+    background-color: #333;
+    padding: 51px; /* Adjusted padding for 1.7 times bigger */
+    border-radius: 15px;
+    margin-top: 40px;
+}
+
+input,
+button {
+    margin: 15px 0;
+    padding: 25.5px; /* Adjusted padding for 1.7 times bigger */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: darkred;
+}
+
+
+nav {
+    background-color: black;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    margin: 10px;
+}
+
+section {
+    padding: 20px;
+}
+
+#login, #signup, #home {
+    display: none;
+}
+
+.form-container {
+    max-width: 400px;
+    margin: auto;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+input, button {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+}
+
+button {
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkred;
+}
+
+
