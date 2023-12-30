@@ -2,10 +2,10 @@ import React from 'react';
 
 const HomePage = () => {
     return (
-        <section>
-            <div>
-                <h2>Welcome to the Home Page.</h2>
-                <p>This is the main content of the home page.</p>
+        <section className="home-container">
+            <div className="home-content">
+                <h2 className="wow-title">Welcome to the Vertual Haven</h2>
+                <p className="wow-text">Get ready for an epic adventure in the world of Vertual Reality.</p>
             </div>
         </section>
     );
