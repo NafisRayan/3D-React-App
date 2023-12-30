@@ -5,103 +5,68 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: black;
     color: white;
-}
-
-/* Header Styles */
-header {
-    background-color: rgb(9, 9, 44);
-    padding: 10px; /* Reduced padding for a smaller header */
-    text-align: center;
-}
-
-/* Navigation Styles */
-nav {
-    background-color: darkpurple;
-    padding: 10px;
-    text-align: center;
-}
-
-.navbar {
-    display: flex;
-    justify-content: center;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    margin: 10px;
-    transition: border-bottom 0.3s ease-in-out;
-}
-
-.navbar a:hover {
-    border-bottom: 2px solid white;
-}
-
-/* Animation Container Styles */
-#animation-container {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    overflow: hidden;
-}
-
-.centered-content {
-    text-align: center;
-}
-
-.centered-content h1 {
-    font-size: 2em;
-}
-
-.centered-content p {
-    font-size: 1.2em;
-    margin-top: 10px;
-}
-
-/* Animation Styles */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.centered-content {
-    animation: fadeInUp 1s ease-in-out;
-}
-
-/* Background Image */
-body {
     background-image: url('https://wallpaperaccess.com/full/4167709.gif');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
-/* Form Container Styles */
-.form-container {
-    max-width: 500px;
-    margin: auto;
-    background-color: #333;
-    padding: 51px; /* Adjusted padding for 1.7 times bigger */
-    border-radius: 15px;
-    margin-top: 40px;
+/* Header Styles */
+header {
+    background-color: rgb(9, 9, 44);
+    padding: 10px;
+    text-align: center;
 }
 
+/* Navigation Styles */
+nav {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px; /* Padding for spacing and clickable area */
+    margin: 0 10px; /* Space between links */
+    transition: border-bottom 0.3s ease-in-out;
+}
+
+nav a:hover {
+    border-bottom: 2px solid white;
+}
+/* Section Styles */
+section {
+    padding: 20px;
+}
+
+/* Form Container Styles */
+.form-container {
+    max-width: 400px; /* Updated width */
+    margin: auto;
+    background-color: #3f018fa1;
+    padding: 60px; /* Adjusted padding for 3 times bigger */
+    border-radius: 10px; /* Updated border-radius */
+    margin-top: 20px;
+    border: 2px solid #fff; /* Added border */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Added box shadow for a subtle effect */
+}
+
+/* Input and Button Styles */
 input,
 button {
-    margin: 15px 0;
-    padding: 25.5px; /* Adjusted padding for 1.7 times bigger */
+    margin: 10px 0; /* Updated margin */
+    padding: 12px; /* Adjusted padding for 3 times bigger */
     width: 100%;
     box-sizing: border-box;
+    font-size: 1.5em; /* Adjusted font size */
+    box-sizing: border-box;
+    font-size: 1.5em; /* Adjusted font size */
+    border: 1px solid #000000; /* Added border */
+   
 }
 
 button {
@@ -118,50 +83,79 @@ button:hover {
 }
 
 
-nav {
-    background-color: black;
-    padding: 10px;
-    text-align: center;
-}
-
-nav a {
+/* Animation Container Styles */
+#animation-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
-    text-decoration: none;
-    padding: 10px;
-    margin: 10px;
+    overflow: hidden;
 }
 
-section {
-    padding: 20px;
+/* Centered Content Styles */
+.centered-content {
+    text-align: center;
+    animation: fadeInUp 1s ease-in-out; /* Merged with animation styles */
 }
 
+.centered-content h1 {
+    font-size: 2em;
+}
+
+.centered-content p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+/* Keyframes Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Display None for Sections */
 #login, #signup, #home {
     display: none;
 }
 
-.form-container {
-    max-width: 400px;
-    margin: auto;
-    background-color: #333;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
+/* Add these styles to your existing stylesheet */
+
+/* Updated Home Container Styles */
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0e0e0e2c; /* Dark background color */
+    color: #fff; /* White text color */
 }
 
-input, button {
-    margin: 10px 0;
-    padding: 10px;
-    width: 100%;
+/* Updated Home Content Styles */
+.home-content {
+    text-align: center;
+    max-width: 800px;
+    margin-top: -30vh
 }
 
-button {
-    background-color: red;
-    color: white;
-    cursor: pointer;
+/* Updated wow Title Styles */
+.wow-title {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #5032da; /* Hot Pink color */
+    font-family: 'Press Start 2P', cursive; /* Stylish gaming font */
 }
 
-button:hover {
-    background-color: darkred;
+/* Updated wow Text Styles */
+.wow-text {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    font-family: 'Roboto', sans-serif; /* Use a readable font */
 }
-
-
