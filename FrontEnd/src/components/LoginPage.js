@@ -10,6 +10,9 @@ const LoginPage = () => {
                     <input type="password" placeholder="Password" />
                     <button type="submit">Login</button>
                 </form>
+                <p style={{ marginTop: '30px', textAlign: 'center', color: '#fff' }}>
+                    Don't have an account? <a href="/signup" style={{ color: 'red' }}>Create one here</a>.
+                </p>
             </div>
         </section>
     );
