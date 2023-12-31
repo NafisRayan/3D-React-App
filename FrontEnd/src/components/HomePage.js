@@ -5,7 +5,7 @@ const HomePage = () => {
         <section className="home-container">
             <div className="home-content">
                 <h2 className="wow-title">Welcome to the Vertual Haven</h2>
-                <p className="wow-text">Get ready for an epic adventure in the world of Vertual Reality.</p>
+                <p className="wow-text">Get ready for an epic adventure in the world of Virtual Reality.</p>
             </div>
         </section>
     );
