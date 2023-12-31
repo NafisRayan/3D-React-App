@@ -13,7 +13,7 @@ const SignupPage = () => {
                     <button type="submit">Sign Up</button>
                 </form>
                 <p style={{ marginTop: '30px', textAlign: 'center', color: '#fff' }}>
-                    Already have an account? <a href="/login" style={{ color: 'red' }}>Create one here</a>.
+                    Already have an account? <a href="/login" style={{ color: 'red' }}>Login here</a>.
                 </p>
             </div>
         </section>
