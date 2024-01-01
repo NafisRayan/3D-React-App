@@ -52,7 +52,11 @@ section {
     max-width: 400px; /* Updated width */
     margin: auto;
     background-color: #3f018fa1;
-    padding: 60px; /* Adjusted padding for 3 times bigger */
+    
+    /* background-image: url('https://media.wired.com/photos/593240ca58b0d64bb35d07ce/master/w_1600%2Cc_limit/hexwave.gif');
+     */
+    
+     padding: 60px; /* Adjusted padding for 3 times bigger */
     border-radius: 10px; /* Updated border-radius */
     margin-top: 20px;
     border: 10px solid #000000; /* Added border */
