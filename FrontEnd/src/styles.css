@@ -55,8 +55,8 @@ section {
     padding: 60px; /* Adjusted padding for 3 times bigger */
     border-radius: 10px; /* Updated border-radius */
     margin-top: 20px;
-    border: 2px solid #fff; /* Added border */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Added box shadow for a subtle effect */
+    border: 10px solid #000000; /* Added border */
+    box-shadow: 0 0 10px rgb(255, 255, 255); /* Added box shadow for a subtle effect */
 }
 
 /* Input and Button Styles */
