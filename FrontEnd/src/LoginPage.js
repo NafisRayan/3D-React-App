@@ -1,52 +1,76 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginPage = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+const [loginData,setLoginData] = useState({
+  username:'',
+  password:'',
+})
 
-    const handleLogin = (e) => {
-        e.preventDefault();
 
-        // Create a data object with the form values
-        const data = {
-            username,
-            password
-        };
+//submit function
+const handleLoginSubmit = async(e) => {
+ e.preventDefault();
 
-        // Make an HTTP POST request to your Node.js backend
-        fetch('/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(result => {
-            // Handle the response from the backend
-            console.log(result);
-        })
-        .catch(error => {
-            // Handle any errors
-            console.error(error);
-        });
-    };
+ try{
+  const response = await axios.post('http://localhost:8000/login',loginData);
+  const {success,message} = response.data;
 
-    return (
-        <section>
-            <div className="form-container">
-                <h2>Login</h2>
-                <form onSubmit={handleLogin}>
-                    <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <button type="submit">Login</button>
-                </form>
-                <p style={{ marginTop: '30px', textAlign: 'center', color: '#fff' }}>
-                    Don't have an account? <a href="/signup" style={{ color: 'red' }}>Create one here</a>.
-                </p>
-            </div>
-        </section>
-    );
+  if(success){
+    console.log('Login Successfully')
+  }
+  else{
+    console.log(message);
+  }
+ }
+ catch(error){
+  console.error('Login error',error)
+ }
+ setLoginData({
+    username:'',
+    password:''
+ })
 }
 
-export default LoginPage;
+  const handleLoginChange = (e) => {
+    const {name,value} = e.target;
+    setLoginData((prevData) => ({
+      ...prevData,
+      [name]:value
+    }))
+  }
+  return (
+    <section>
+    <div className="form-container">
+      <h1>Login Page</h1>
+      <form onSubmit={handleLoginSubmit}>
+        <input 
+        type='text'
+        name='username'
+        placeholder='Username'
+        value={loginData.username}
+        onChange={handleLoginChange}
+        required
+        />
+        <input 
+        type='password'
+        name='password'
+        placeholder='Password'
+        value={loginData.password}
+        onChange={handleLoginChange}
+        required
+        />
+        <button type='submit'>Login</button>
+        
+        <p style={{ marginTop: '30px', textAlign: 'center', color: '#fff' }}>
+                    Don't have an account? <a href="/signup" style={{ color: 'red' }}>Create one here</a>.
+        </p>
+      </form>
+    </div>
+    </section>
+  )
+}
+
+export default LoginPage
+
