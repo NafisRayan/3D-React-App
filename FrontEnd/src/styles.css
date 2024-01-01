@@ -9,6 +9,7 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    height: 100vh;
 }
 
 /* Header Styles */
@@ -16,6 +17,9 @@ header {
     background-color: rgb(9, 9, 44);
     padding: 10px;
     text-align: center;
+    background-image: url('https://www.theteacherpoint.com/wp-content/uploads/2019/12/Animated-Pattern-GIF.gif');
+    background-size: 10%;
+
 }
 
 /* Navigation Styles */
@@ -133,16 +137,19 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #0e0e0e2c; /* Dark background color */
-    color: #fff; /* White text color */
-}
+    background-color: #0e0e0e3b;
+    background-size: cover;
+    color: #fff;
+    height: calc(100vh - 30vh);
+    width: 80vw;
+    margin: 0 auto;  /* This centers the container horizontally */
+  }
 
 /* Updated Home Content Styles */
 .home-content {
     text-align: center;
     max-width: 800px;
-    margin-top: -30vh
+    /* margin-top: 30vh */
 }
 
 /* Updated wow Title Styles */
