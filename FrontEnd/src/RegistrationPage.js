@@ -1,69 +1,59 @@
-import React, { useState } from 'react'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
+//SignupPage.js
+import React, { useState } from 'react';
 
-const RegistrationPage = () => {
-    const [registrationData,setRegistrationData] = useState({
-        username:'',
-        password:''
-    })
+const SignupPage = () => {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
+    const handleSignup = (e) => {
+        e.preventDefault();
 
-const handleRegistrationChange = (e) => {
-const {name,value} = e.target;
+        // Create a data object with the form values
+        const data = {
+            username,
+            email,
+            password,
+            confirmPassword
+        };
 
-setRegistrationData((prevData) => ({
-    ...prevData,
-    [name] : value,
-}))
+        // Make an HTTP POST request to your Node.js backend
+        fetch('/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            // Handle the response from the backend
+            console.log(result);
+        })
+        .catch(error => {
+            // Handle any errors
+            console.error(error);
+        });
+    };
 
+    return (
+        <section>
+            <div className="form-container">
+                <h2>Sign Up</h2>
+                <form onSubmit={handleSignup}>
+                    <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                    <button type="submit">Sign Up</button>
+                </form>
+                <p style={{ marginTop: '30px', textAlign: 'center', color: '#fff' }}>
+                    Already have an account? <a href="/login" style={{ color: 'red' }}>Login here</a>.
+                </p>
+            </div>
+        </section>
+    );
 }
 
-const handleRegistrationSubmit = async(e) => {
-e.preventDefault();
-try{
-    const response = await axios.post('http://localhost:8000/register',registrationData);
-    console.log(response.data);
-}
-catch(error){
-    console.log(error)
-}
-setRegistrationData({
-    username:'',
-    password:'',
-})
-}
-
-  return (
-    <section>
-    <div className="form-container">
-      <h1>Registration Form</h1>
-      <form onSubmit={handleRegistrationSubmit}>
-        <input 
-        type='text'
-        name='username'
-        placeholder='Username'
-        value={registrationData.username}
-        onChange={handleRegistrationChange}
-        required
-        />
-
-        <input 
-        type='password'
-        name='password'
-        placeholder='Password'
-        value={registrationData.password}
-        onChange={handleRegistrationChange}
-        required
-        />
-        <button type='submit'>Register</button>
-        <p>
-            Already registered? <Link to="/login">Login Here</Link>
-        </p>
-      </form>
-    </div>
-    </section>
-  )
-}
-
-export default RegistrationPage;
+export default SignupPage;
