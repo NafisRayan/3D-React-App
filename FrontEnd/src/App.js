@@ -1,26 +1,63 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
 import Header from './Header';
-import Navigation from './Navigation';
+import Navigation from './Navigation'; 
+import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 import RegistrationPage from './RegistrationPage';
-import HomePage from './HomePage';
+import ProfilePage from './ProfilePage';
 
-const App = () => {
-    return (
-        <Router>
-            <div>
-                <Header />
-                <Navigation />
+function App() {
 
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/signup" element={<RegistrationPage />} />
-                </Routes>
-            </div>
-        </Router>
-    );
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const ProtectedRoute = ({children}) => {
+    if(!isAuthenticated) {
+      return <Navigate to="/login" />
+    }  
+    return children;
+  };
+
+  const handleLogin = () => {
+    // API call
+    setIsAuthenticated(true);
+  };
+
+  return (
+    <Router>
+      <Header />
+
+      <Navigation 
+        isAuthenticated={isAuthenticated}
+      />
+
+      <Routes>
+
+        <Route path="/" element={<HomePage />} />
+
+        <Route 
+          path="/login"
+          element={<LoginPage onLogin={handleLogin} />} 
+        />
+
+        <Route 
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route 
+          path="/signup"
+          element={<RegistrationPage />}
+        />
+
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
