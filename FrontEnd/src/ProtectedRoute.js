@@ -1,9 +1,11 @@
-import React from 'react';
+//src/ProtectedRoute.js
 
-const ProtectedRoute = ({ children }) => {
-  
-  if (!isAuthenticated) { 
-    return <Navigate to="/login" />;
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+
+const ProtectedRoute = ({ children, isAuthenticated }) => {
+  if (!isAuthenticated) {
+    return <Navigate to="/profile" />;
   }
 
   return children;
