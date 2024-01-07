@@ -3,7 +3,7 @@
 const express = require('express');
 const session = require('express-session');
 const app = express();
-const port = 3000;
+const port = 5000;
 const connectDB = require('./db/dbConnection');
 const User = require('./db/user');
 const cors = require('cors');
@@ -11,13 +11,9 @@ const cors = require('cors');
 // Middleware for parsing JSON
 app.use(express.json());
 
-// Add CORS and session config
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-  })
-);
+
+app.use(cors());
+app.use(express.urlencoded({extended:true}))
 
 // Configure session middleware
 app.use(
@@ -39,7 +35,7 @@ app.post('/register', async (req, res) => {
     console.log(req.body);
     const user = new User({ username, password });
     await user.save();
-    res.status(201).json({ message: 'Registration Successful' });
+    res.status(201).json({ message: 'Registration successful' });
   } catch (error) {
     res.status(500).json({ error: 'Registration failed' });
   }
@@ -51,16 +47,11 @@ app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
 
-    if (!user) {
-      return res.status(401).json({ error: 'Invalid username or Password' });
-    }
-
-    if (user.password !== password) {
+    if (!user || user.password !== password) {
       return res.status(401).json({ error: 'Invalid username or password' });
     }
 
-    // Store user information in the session
-    req.session.user = user;
+    req.session.user = user; // Store user information in the session
 
     res.status(200).json({ message: 'Login successful' });
   } catch (error) {
@@ -96,5 +87,5 @@ app.post('/logout', (req, res) => {
 connectDB();
 
 app.listen(port, () => {
-  console.log('Server is listening on Port 3000');
+  console.log('Server is listening on Port 5000');
 });

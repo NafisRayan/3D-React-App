@@ -24,7 +24,7 @@ const LoginPage = ({ onLogin }) => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/login', loginData);
+      const response = await axios.post('http://localhost:5000/login', loginData);
       console.log(response.data);
 
       // Assuming your server sends a success message upon successful login
@@ -32,6 +32,9 @@ const LoginPage = ({ onLogin }) => {
         if (onLogin) {
           onLogin(); // Trigger the authentication process
         }
+
+        localStorage.setItem('user', JSON.stringify(loginData))
+        sessionStorage.setItem('user', JSON.stringify(loginData))
 
         // Redirect to the profile page
         navigate('/profile');
