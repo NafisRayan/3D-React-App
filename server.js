@@ -59,30 +59,37 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Get Username
-app.get('/getUsername', (req, res) => {
-  if (req.session.user) {
-    const { username } = req.session.user;
-    res.status(200).json({ username });
-  } else {
-    res.status(401).json({ error: 'User not authenticated' });
-  }
-});
+// // Get Username
+// app.get('/getUsername', (req, res) => {
+//   if (req.session.user) {
+//     const { username } = req.session.user;
+//     res.status(200).json({ username });
+//   } else {
+//     res.status(401).json({ error: 'User not authenticated' });
+//   }
+// });
 
-// Logout
-app.post('/logout', (req, res) => {
-  if (req.session.user) {
-    req.session.destroy((err) => {
-      if (err) {
-        res.status(500).json({ error: 'Logout failed' });
-      } else {
-        res.status(200).json({ message: 'Logout successful' });
-      }
-    });
-  } else {
-    res.status(401).json({ error: 'User not authenticated' });
-  }
-});
+// // Logout
+// app.post('/logout', (req, res) => {
+//   if (req.session.user) {
+//     req.session.destroy((err) => {
+//       if (err) {
+//         res.status(500).json({ error: 'Logout failed' });
+//       } else {
+//         res.status(200).json({ message: 'Logout successful' });
+//       }
+//     });
+//   } else {
+//     res.status(401).json({ error: 'User not authenticated' });
+//   }
+// });
+
+////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////
 
 connectDB();
 

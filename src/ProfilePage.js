@@ -6,7 +6,9 @@ import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
 
-  
+/////////////////////////////////////////////////
+
+/////////////////////////////////////////////////
 
   const [userinfo, setUserinfo] = useState({});
 
