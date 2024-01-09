@@ -1,20 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>3D Objects Viewer</title>
   <style>
-   html,
-   body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    /* background-image: url('https://wallpaperaccess.com/full/4167709.gif'); */
-    background-size: cover;
-   }
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #f0f0f0; /* Set a background color for better visibility */
+    }
+
+    #menu {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
   </style>
-  </head>
-  <body></body>
+</head>
+<body>
+  <div id="menu">
+    <label for="objectType">Select Object Type:</label>
+    <select id="objectType">
+      <option value="box">Cube/Box</option>
+      <option value="sphere">Sphere</option>
+      <option value="cylinder">Cylinder</option>
+      <!-- Add more options for custom objects if needed -->
+    </select>
+    <button id="addButton">Add</button>
+  </div>
+  <script src="https://threejs.org/build/three.js"></script>
+  <script src="https://threejs.org/examples/jsm/loaders/OBJLoader.js"></script>
+  <script src="https://threejs.org/examples/jsm/controls/OrbitControls.js"></script>
   <script src="./index.js"></script>
+</body>
 </html>

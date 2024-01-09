@@ -68,20 +68,35 @@ function createFloor() {
 
 
 // box
+// function createBox() {
+//   let scale = { x: 6, y: 6, z: 6 }
+//   let pos = { x: 15, y: scale.y / 2, z: 15 }
+
+//   let box = new THREE.Mesh(new THREE.BoxBufferGeometry(), 
+//       new THREE.MeshPhongMaterial({ color: 0xDC143C }));
+//   box.position.set(pos.x, pos.y, pos.z);
+//   box.scale.set(scale.x, scale.y, scale.z);
+//   box.castShadow = true;
+//   box.receiveShadow = true;
+//   scene.add(box)
+
+//   box.userData.draggable = true
+//   box.userData.name = 'BOX'
+// }
+
 function createBox() {
+  let size = 6;
   let scale = { x: 6, y: 6, z: 6 }
   let pos = { x: 15, y: scale.y / 2, z: 15 }
 
-  let box = new THREE.Mesh(new THREE.BoxBufferGeometry(), 
-      new THREE.MeshPhongMaterial({ color: 0xDC143C }));
-  box.position.set(pos.x, pos.y, pos.z);
-  box.scale.set(scale.x, scale.y, scale.z);
-  box.castShadow = true;
-  box.receiveShadow = true;
-  scene.add(box)
+  let cube = new THREE.Mesh(new THREE.BoxBufferGeometry(size, size, size), new THREE.MeshPhongMaterial({ color: 0xff0000 }));
+  cube.position.set(pos.x, pos.y, pos.z);
+  cube.castShadow = true;
+  cube.receiveShadow = true;
+  scene.add(cube);
 
-  box.userData.draggable = true
-  box.userData.name = 'BOX'
+  cube.userData.draggable = true;
+  cube.userData.name = 'CUBE';
 }
 
 function createSphere() {
