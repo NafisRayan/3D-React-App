@@ -66,24 +66,6 @@ function createFloor() {
   blockPlane.userData.ground = true;
 }
 
-
-// box
-// function createBox() {
-//   let scale = { x: 6, y: 6, z: 6 }
-//   let pos = { x: 15, y: scale.y / 2, z: 15 }
-
-//   let box = new THREE.Mesh(new THREE.BoxBufferGeometry(), 
-//       new THREE.MeshPhongMaterial({ color: 0xDC143C }));
-//   box.position.set(pos.x, pos.y, pos.z);
-//   box.scale.set(scale.x, scale.y, scale.z);
-//   box.castShadow = true;
-//   box.receiveShadow = true;
-//   scene.add(box)
-
-//   box.userData.draggable = true
-//   box.userData.name = 'BOX'
-// }
-
 function createBox() {
   let size = 6;
   let scale = { x: 6, y: 6, z: 6 }
@@ -221,6 +203,110 @@ function dragObject() {
     }
   }
 }
+
+
+// ...
+
+function newBox() {
+  let size = 6;
+
+  let box = new THREE.Mesh(new THREE.BoxBufferGeometry(size, size, size), new THREE.MeshPhongMaterial({ color: 0xff0000 }));
+  box.position.set(0, size / 2, 0); // Set position to center of the plane
+  box.castShadow = true;
+  box.receiveShadow = true;
+  scene.add(box);
+
+  box.userData.draggable = true;
+  box.userData.name = 'CUBE';
+}
+
+function newSphere() {
+  let radius = 4;
+
+  let sphere = new THREE.Mesh(new THREE.SphereBufferGeometry(radius, 32, 32), new THREE.MeshPhongMaterial({ color: 0x43a1f4 }))
+  sphere.position.set(0, radius, 0); // Set position to center of the plane
+  sphere.castShadow = true;
+  sphere.receiveShadow = true;
+  scene.add(sphere);
+
+  sphere.userData.draggable = true;
+  sphere.userData.name = 'SPHERE';
+}
+
+function newCylinder() {
+  let radius = 4;
+  let height = 6;
+
+  let cylinder = new THREE.Mesh(new THREE.CylinderBufferGeometry(radius, radius, height, 32), new THREE.MeshPhongMaterial({ color: 0x90ee90 }))
+  cylinder.position.set(0, height / 2, 0); // Set position to center of the plane
+  cylinder.castShadow = true;
+  cylinder.receiveShadow = true;
+  scene.add(cylinder);
+
+  cylinder.userData.draggable = true;
+  cylinder.userData.name = 'CYLINDER';
+}
+
+function newCastle() {
+  const objLoader = new OBJLoader();
+
+  objLoader.loadAsync('./castle.obj').then((group) => {
+    const castle = group.children[0];
+
+    castle.position.x = 0;
+    castle.position.z = 0;
+
+    castle.scale.x = 5;
+    castle.scale.y = 5;
+    castle.scale.z = 5;
+
+    castle.castShadow = true;
+    castle.receiveShadow = true;
+
+    castle.userData.draggable = true;
+    castle.userData.name = 'CASTLE';
+
+    scene.add(castle);
+  })
+}
+
+function addObj(name: string) {
+  switch (name) {
+    case 'Cube':
+      newBox();
+      break;
+    case 'Sphere':
+      newSphere();
+      break;
+    case 'Cylinder':
+      newCylinder();
+      break;
+    case 'Castle':
+      newCastle();
+      break;
+    default:
+      console.log(`Object with name '${name}' does not exist.`);
+  }
+}
+
+window.addEventListener('keydown', event => {
+  const resizeSpeed = 0.1; // You can adjust the resize speed as needed
+
+  const size = parseInt(event.key);
+  if (!isNaN(size)) {
+    resizeObject(size);
+  } else if (event.key === 'Delete') {
+    resizeObject(0);
+  } else if (event.key === 'a') {
+    addObj('Cube');
+  } else if (event.key === 's') {
+    addObj('Sphere');
+  } else if (event.key === 'c') {
+    addObj('Cylinder');
+  } else if (event.key === 't') {
+    addObj('Castle');
+  }
+});
 
 
 createFloor()
