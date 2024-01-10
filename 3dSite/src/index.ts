@@ -2,6 +2,12 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 
+(window as any).newBox = newBox;
+(window as any).newSphere = newSphere;
+(window as any).newCylinder = newCylinder;
+(window as any).newCastle = newCastle;
+
+
 // CAMERA
 const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1500);
 camera.position.set(-35, 70, 100);
@@ -204,7 +210,6 @@ function dragObject() {
   }
 }
 
-
 // ...
 
 function newBox() {
@@ -270,49 +275,9 @@ function newCastle() {
   })
 }
 
-function addObj(name: string) {
-  switch (name) {
-    case 'Cube':
-      newBox();
-      break;
-    case 'Sphere':
-      newSphere();
-      break;
-    case 'Cylinder':
-      newCylinder();
-      break;
-    case 'Castle':
-      newCastle();
-      break;
-    default:
-      console.log(`Object with name '${name}' does not exist.`);
-  }
-}
-
-window.addEventListener('keydown', event => {
-  const resizeSpeed = 0.1; // You can adjust the resize speed as needed
-
-  const size = parseInt(event.key);
-  if (!isNaN(size)) {
-    resizeObject(size);
-  } else if (event.key === 'Delete') {
-    resizeObject(0);
-  } else if (event.key === 'a') {
-    addObj('Cube');
-  } else if (event.key === 's') {
-    addObj('Sphere');
-  } else if (event.key === 'c') {
-    addObj('Cylinder');
-  } else if (event.key === 't') {
-    addObj('Castle');
-  }
-});
-
-
 createFloor()
 createBox()
 createSphere()
 createCylinder()
 createCastle()
-
 animate()
