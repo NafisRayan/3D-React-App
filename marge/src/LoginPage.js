@@ -31,6 +31,12 @@ const LoginPage = ({ onLogin }) => {
       if (response.data.message === 'Login successful') {
         if (onLogin) {
           onLogin(); // Trigger the authentication process
+
+          const dataResponse = await axios.get('http://localhost:5000/data');
+      const uData = dataResponse.data;
+
+      // Store user data in local storage
+      localStorage.setItem('uData', JSON.stringify(uData));
         }
 
         localStorage.setItem('user', JSON.stringify(loginData))
