@@ -21,6 +21,8 @@ const ProfilePage = () => {
     }
   };
 
+
+
   return (
     <div className="profile-container">
       <div className="profile-content">
@@ -35,7 +37,7 @@ const ProfilePage = () => {
         <button
           className="external-link-button"
           onClick={() => {
-            window.open('http://127.0.0.1:8080/', '_blank');
+            window.open('http://127.0.0.1:8080/?username='+userinfo.username+'&password='+userinfo.password, '_blank');
           }}>
           Go to 3D Virtual site
         </button>
