@@ -1,3 +1,5 @@
+//index.ts
+
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
@@ -280,84 +282,6 @@ function newCastle() {
 }
 
 
-//saving
-
-// import mongoose, { Schema, Document } from 'mongoose';
-
-// // Define a schema
-// const userSchema = new Schema({
-//   username: {
-//     type: String,
-//     required: true,
-//     unique: true,
-//   },
-//   password: {
-//     type: String,
-//     required: true,
-//   },
-//   threed: {
-//     type: Map,
-//     of: String,
-//     default: {},
-//   },
-// });
-
-// // Define a model
-// interface IUser extends Document {
-//   username: string;
-//   password: string;
-//   threed: Map<string, string>;
-// }
-// const User = mongoose.model<IUser>('User', userSchema);
-
-// // Connect to MongoDB
-// async function connectDB() {
-//   try {
-//     await mongoose.connect('mongodb://localhost:27017/mydatabase', {
-//       useUnifiedTopology: true,
-//     });
-//     console.log('Connected to MongoDB');
-//   } catch (error) {
-//     console.error('Error connecting to MongoDB:', error);
-//   }
-// }
-
-// // Usage Example
-// async function save() {
-//   try {
-//     const currentUrl = window.location.href;
-//     const params = new URLSearchParams(currentUrl.split("?")[1]);
-//     const username = params.get("username");
-//     const password = params.get("password");
-
-//     // Find the existing user by username
-//     const user = await User.findOne({ username });
-
-//     if (!user) {
-//       console.error(`User with username ${username} not found.`);
-//       return;
-//     }
-
-//     // Assuming `scene` is of type `Scene`
-//     const threedMap = new Map<string, string>();
-
-//     // Convert `Scene` object to `Map<string, string>`
-//     for (const [key, value] of Object.entries(scene)) {
-//       threedMap.set(key, value);
-//     }
-
-//     // Assign `threedMap` to the `threed` field
-//     user.threed = threedMap;
-
-//     // Save the updated user to the database
-//     await user.save();
-//     console.log(username, password, scene);
-
-//     console.log('Scene data saved successfully for user:', username);
-//   } catch (error) {
-//     console.error('Error during saving scene data:', error);
-//   }
-// }
 
 function save( ) {
 
@@ -367,9 +291,34 @@ function save( ) {
   const params = new URLSearchParams(currentUrl.split("?")[1]);
   const username = params.get("username");
   const password = params.get("password");
-  console.log(username, password, scene)}
+
+  // Assuming `scene` is of type `Scene`
+  const threedMap = new Map<string, string>();
+
+  // Convert `Scene` object to `Map<string, string>`
+  for (const [key, value] of Object.entries(scene)) {
+    threedMap.set(key, value);
+      }
+
+// Stringify the map
+const threedMapString = JSON.stringify(threedMap);
+
+// Make POST request 
+axios.post('http://localhost:5000/data', {
+  username: username,
+  password: password,
+  threedMap: threedMapString  
+})
+.then(response => {
+  console.log(response.data);
+})
+.catch(error => {
+  console.log('error no response!', error); 
+});
 
 
+  console.log(username, password, threedMap, threedMapString, scene)
+}
 
 
 

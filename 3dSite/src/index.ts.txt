@@ -1,12 +1,16 @@
+//index.ts
+
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import axios from 'axios';
 
-(window as any).newBox = createBox;
-(window as any).newSphere = createSphere;
-(window as any).newCylinder = createCylinder;
-(window as any).newCastle = createCastle;
+(window as any).newBox = newBox;
+(window as any).newSphere = newSphere;
+(window as any).newCylinder = newCylinder;
+(window as any).newCastle = newCastle;
 
+(window as any).save = save;
 
 // CAMERA
 const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1500);
@@ -71,24 +75,6 @@ function createFloor() {
 
   blockPlane.userData.ground = true;
 }
-
-
-// box
-// function createBox() {
-//   let scale = { x: 6, y: 6, z: 6 }
-//   let pos = { x: 15, y: scale.y / 2, z: 15 }
-
-//   let box = new THREE.Mesh(new THREE.BoxBufferGeometry(), 
-//       new THREE.MeshPhongMaterial({ color: 0xDC143C }));
-//   box.position.set(pos.x, pos.y, pos.z);
-//   box.scale.set(scale.x, scale.y, scale.z);
-//   box.castShadow = true;
-//   box.receiveShadow = true;
-//   scene.add(box)
-
-//   box.userData.draggable = true
-//   box.userData.name = 'BOX'
-// }
 
 function createBox() {
   let size = 6;
@@ -228,7 +214,6 @@ function dragObject() {
   }
 }
 
-
 // ...
 
 function newBox() {
@@ -267,6 +252,8 @@ function newCylinder() {
   cylinder.receiveShadow = true;
   scene.add(cylinder);
 
+  console.log(scene);
+
   cylinder.userData.draggable = true;
   cylinder.userData.name = 'CYLINDER';
 }
@@ -294,43 +281,31 @@ function newCastle() {
   })
 }
 
-function addObj(name: string) {
-  switch (name) {
-    case 'Cube':
-      newBox();
-      break;
-    case 'Sphere':
-      newSphere();
-      break;
-    case 'Cylinder':
-      newCylinder();
-      break;
-    case 'Castle':
-      newCastle();
-      break;
-    default:
-      console.log(`Object with name '${name}' does not exist.`);
-  }
+
+//shakila
+
+function save( ) {
+
+  console.log(scene);
+  const currentUrl = window.location.href;
+  console.log(currentUrl);
+  const params = new URLSearchParams(currentUrl.split("?")[1]);
+  const username = params.get("username");
+  const password = params.get("password");
+
+  // Assuming `scene` is of type `Scene`
+  const threedMap = new Map<string, string>();
+
+  // Convert `Scene` object to `Map<string, string>`
+  for (const [key, value] of Object.entries(scene)) {
+    threedMap.set(key, value);
+      }
+
+
+  console.log(username, password, threedMap, scene)
 }
 
-window.addEventListener('keydown', event => {
-  const resizeSpeed = 0.1; // You can adjust the resize speed as needed
 
-  const size = parseInt(event.key);
-  if (!isNaN(size)) {
-    resizeObject(size);
-  } else if (event.key === 'Delete') {
-    resizeObject(0);
-  } else if (event.key === 'a') {
-    addObj('Cube');
-  } else if (event.key === 's') {
-    addObj('Sphere');
-  } else if (event.key === 'c') {
-    addObj('Cylinder');
-  } else if (event.key === 't') {
-    addObj('Castle');
-  }
-});
 
 
 createFloor()
@@ -339,4 +314,5 @@ createSphere()
 createCylinder()
 createCastle()
 
+save()
 animate()

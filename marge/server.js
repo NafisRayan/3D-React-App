@@ -13,6 +13,8 @@ app.use(express.json());
 
 
 app.use(cors());
+app.options('*', cors());
+app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
 // Configure session middleware
@@ -61,23 +63,23 @@ app.post('/login', async (req, res) => {
 
 // Endpoint to fetch user data
 app.post('/data', async (req, res) => {
-    try {
-      const { username, password } = req.body;
-      const user = await User.findOne({ username });
-  
-      if (!user || user.password !== password) {
-        return res.status(401).json({ error: 'Invalid username or password' });
-      }
-  
-      
-      res.status(200).json( user );
-    } catch (error) {
-      res.status(500).json({ error: 'Login failed' });
-    }
-  }
 
-);
+  const { username, password, threedMap } = req.body;
+  
+  // Find user
+  const user = await User.findOne({ username });  
 
+  // Parse threedMap string to object
+  const threedObject = JSON.parse(threedMap);
+  
+  // Save threed data to user
+  user.threed = threedObject;
+  
+  await user.save();
+
+  res.sendStatus(200);
+
+})
 
 
 // // Get Username
