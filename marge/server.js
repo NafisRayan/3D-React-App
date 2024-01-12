@@ -7,13 +7,18 @@ const port = 5000;
 const connectDB = require('./db/dbConnection');
 const User = require('./db/user');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+
 
 // Middleware for parsing JSON
 app.use(express.json());
 
 
 app.use(cors());
-app.options('*', cors());
+// app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
@@ -61,58 +66,39 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Endpoint to fetch user data
+// Endpoint to save threed data to user
 app.post('/data', async (req, res) => {
+  const { username, password, threed } = req.body;
 
-  const { username, password, threedMap } = req.body;
-  
-  // Find user
-  const user = await User.findOne({ username });  
+try {  // Find user
+  const user = await User.findOne({ username });
 
-  // Parse threedMap string to object
-  const threedObject = JSON.parse(threedMap);
-  
   // Save threed data to user
-  user.threed = threedObject;
-  
+  user.threed = JSON.parse(threed);
+
   await user.save();
 
-  res.sendStatus(200);
+  res.sendStatus(200);}
+  catch (error) {res.status(505).json({ error: 'new user threed problem' })}
 
-})
+});
 
+// Endpoint to fetch threed data for authenticated user
+app.get('/threed', async (req, res) => {
+ const { username, password } = req.query;
 
-// // Get Username
-// app.get('/getUsername', (req, res) => {
-//   if (req.session.user) {
-//     const { username } = req.session.user;
-//     res.status(200).json({ username });
-//   } else {
-//     res.status(401).json({ error: 'User not authenticated' });
-//   }
-// });
+ // Find user
+ const user = await User.findOne({ username });
 
-// // Logout
-// app.post('/logout', (req, res) => {
-//   if (req.session.user) {
-//     req.session.destroy((err) => {
-//       if (err) {
-//         res.status(500).json({ error: 'Logout failed' });
-//       } else {
-//         res.status(200).json({ message: 'Logout successful' });
-//       }
-//     });
-//   } else {
-//     res.status(401).json({ error: 'User not authenticated' });
-//   }
-// });
-
-////////////////////////////////////////
+ if (!user || user.password !== password) {
+  res.sendStatus(401); // Unauthorized
+ } else {
+  res.send(user.threed);
+ }
+});
 
 
 
-
-////////////////////////////////////////
 
 connectDB();
 

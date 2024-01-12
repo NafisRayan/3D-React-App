@@ -1,5 +1,3 @@
-//user.js
-
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
@@ -13,8 +11,7 @@ const UserSchema = new mongoose.Schema({
     required: true
   },
   threed: { 
-    type: Map,
-    of: String,
+    type: mongoose.Schema.Types.Mixed,
     default: {}
   }
 });

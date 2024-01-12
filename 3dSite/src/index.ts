@@ -11,14 +11,16 @@ import axios from 'axios';
 (window as any).newCastle = newCastle;
 
 (window as any).save = save;
+(window as any).load = load; // Add the "load" function
+
 
 // CAMERA
-const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1500);
+let camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1500);
 camera.position.set(-35, 70, 100);
 camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 // RENDERER
-const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer({ antialias: true });
+let renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
@@ -33,11 +35,11 @@ export function onWindowResize() {
 window.addEventListener('resize', onWindowResize);
 
 // SCENE
-const scene: THREE.Scene = new THREE.Scene()
+let scene: THREE.Scene = new THREE.Scene()
 scene.background = new THREE.Color(0xbfd1e5);
 
 // CONTROLS
-const controls = new OrbitControls(camera, renderer.domElement);
+let controls = new OrbitControls(camera, renderer.domElement);
 
 export function animate() {
   dragObject();
@@ -123,10 +125,10 @@ function createCylinder() {
 }
 
 function createCastle () {
-  const objLoader = new OBJLoader();
+  let objLoader = new OBJLoader();
 
   objLoader.loadAsync('./castle.obj').then((group) => {
-    const castle = group.children[0];
+    let castle = group.children[0];
 
     castle.position.x = -15
     castle.position.z = -15
@@ -153,9 +155,9 @@ function resizeObject(sizeMultiplier: number) {
 
 // resize and delete
 window.addEventListener('keydown', event => {
-  const resizeSpeed = 0.1; // You can adjust the resize speed as needed
+  let resizeSpeed = 0.1; // You can adjust the resize speed as needed
 
-  const size = parseInt(event.key);
+  let size = parseInt(event.key);
   if (!isNaN(size)) {
     resizeObject(size);
   } else if (event.key === 'Delete') {
@@ -163,9 +165,9 @@ window.addEventListener('keydown', event => {
   }
 });
 
-const raycaster = new THREE.Raycaster(); // create once
-const clickMouse = new THREE.Vector2();  // create once
-const moveMouse = new THREE.Vector2();   // create once
+let raycaster = new THREE.Raycaster(); // create once
+let clickMouse = new THREE.Vector2();  // create once
+let moveMouse = new THREE.Vector2();   // create once
 var draggable: THREE.Object3D;
 
 function intersect(pos: THREE.Vector2) {
@@ -184,7 +186,7 @@ window.addEventListener('click', event => {
   clickMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   clickMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  const found = intersect(clickMouse);
+  let found = intersect(clickMouse);
   if (found.length > 0) {
     if (found[0].object.userData.draggable) {
       draggable = found[0].object
@@ -200,7 +202,7 @@ window.addEventListener('mousemove', event => {
 
 function dragObject() {
   if (draggable != null) {
-    const found = intersect(moveMouse);
+    let found = intersect(moveMouse);
     if (found.length > 0) {
       for (let i = 0; i < found.length; i++) {
         if (!found[i].object.userData.ground)
@@ -259,10 +261,10 @@ function newCylinder() {
 }
 
 function newCastle() {
-  const objLoader = new OBJLoader();
+  let objLoader = new OBJLoader();
 
   objLoader.loadAsync('./castle.obj').then((group) => {
-    const castle = group.children[0];
+    let castle = group.children[0];
 
     castle.position.x = 0;
     castle.position.z = 0;
@@ -281,33 +283,23 @@ function newCastle() {
   })
 }
 
-
+// let iniScene = scene
 
 function save( ) {
 
-  console.log(scene);
-  const currentUrl = window.location.href;
+  console.log(scene.toJSON());
+
+  let currentUrl = window.location.href;
   console.log(currentUrl);
-  const params = new URLSearchParams(currentUrl.split("?")[1]);
-  const username = params.get("username");
-  const password = params.get("password");
-
-  // Assuming `scene` is of type `Scene`
-  const threedMap = new Map<string, string>();
-
-  // Convert `Scene` object to `Map<string, string>`
-  for (const [key, value] of Object.entries(scene)) {
-    threedMap.set(key, value);
-      }
-
-// Stringify the map
-const threedMapString = JSON.stringify(threedMap);
+  let params = new URLSearchParams(currentUrl.split("?")[1]);
+  let username = params.get("username");
+  let password = params.get("password");
 
 // Make POST request 
 axios.post('http://localhost:5000/data', {
   username: username,
   password: password,
-  threedMap: threedMapString  
+  threed:  JSON.stringify(scene.toJSON())
 })
 .then(response => {
   console.log(response.data);
@@ -316,11 +308,38 @@ axios.post('http://localhost:5000/data', {
   console.log('error no response!', error); 
 });
 
-
-  console.log(username, password, threedMap, threedMapString, scene)
+ console.log(username, password, scene)
 }
 
+function load() {
+     let currentUrl = window.location.href;
+     let params = new URLSearchParams(currentUrl.split("?")[1]);
+     let username = params.get("username");
+     let password = params.get("password");
+    
+     // Make GET request
+     axios.get('http://localhost:5000/threed', {
+      params: {
+       username: username,
+       password: password
+      }
+     })
+     .then(response => {
+      let threed = response.data;
+      console.log('kirebada',threed);
+      
+    // Clear the scene
+    scene.clear();
+    // scene = iniScene;
 
+    let loader = new THREE.ObjectLoader();
+    scene.add(loader.parse(threed));
+    
+    })
+     .catch(error => {
+      console.log('error retrieving threed data!', error);
+     });
+    }
 
 createFloor()
 createBox()
@@ -329,4 +348,5 @@ createCylinder()
 createCastle()
 
 save()
+
 animate()

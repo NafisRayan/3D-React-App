@@ -23,19 +23,34 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    #saveButton {
-      position: absolute;
-      top: 10px;
-      left: 10px; /* Move the "Save" button to the top-left position */
-      background-color: #af4c4c; /* Green color */
-      color: white;
-      padding: 10px 20px;
-      width: auto;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
+#saveButton {
+  position: absolute;
+  top: 10px;
+  left: 10px; /* Move the "Save" button to the top-left position */
+  background-color: #af4c4c; /* Red color */
+  color: white;
+  padding: 10px 20px;
+  width: auto;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#loadButton {
+  position: absolute;
+  top: 50px; /* Move the "Load" button below the "Save" button */
+  left: 10px; /* Move the "Load" button to the top-left position */
+  background-color: #af4c4c; /* Red color */
+  color: white;
+  padding: 10px 20px;
+  width: auto;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
 
     button {
       background-color: #af4c4c; /* Green color */
@@ -63,7 +78,8 @@
     <button onclick="newCylinder()">Add Cylinder</button>
     <button onclick="newCastle()">Add Castle</button>
   </div>
-  <button id="saveButton" onclick="save()">Save</button> <!-- Move the "Save" button outside the menu div -->
+  <button id="saveButton" onclick="save()">Save</button>
+  <button id="loadButton" onclick="load()">Load</button> <!-- Add the "Load" button -->
   <script src="https://threejs.org/build/three.js"></script>
   <script src="https://threejs.org/examples/jsm/loaders/OBJLoader.js"></script>
   <script src="https://threejs.org/examples/jsm/controls/OrbitControls.js"></script>

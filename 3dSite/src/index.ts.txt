@@ -11,6 +11,8 @@ import axios from 'axios';
 (window as any).newCastle = newCastle;
 
 (window as any).save = save;
+(window as any).load = load; // Add the "load" function
+
 
 // CAMERA
 const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1500);
@@ -286,27 +288,53 @@ function newCastle() {
 
 function save( ) {
 
-  console.log(scene);
+  console.log(scene.toJSON());
+
   const currentUrl = window.location.href;
   console.log(currentUrl);
   const params = new URLSearchParams(currentUrl.split("?")[1]);
   const username = params.get("username");
   const password = params.get("password");
 
-  // Assuming `scene` is of type `Scene`
-  const threedMap = new Map<string, string>();
+// Make POST request 
+axios.post('http://localhost:5000/data', {
+  username: username,
+  password: password,
+  threed:  JSON.stringify(scene.toJSON())
+})
+.then(response => {
+  console.log(response.data);
+})
+.catch(error => {
+  console.log('error no response!', error); 
+});
 
-  // Convert `Scene` object to `Map<string, string>`
-  for (const [key, value] of Object.entries(scene)) {
-    threedMap.set(key, value);
-      }
-
-
-  console.log(username, password, threedMap, scene)
+ console.log(username, password, scene)
 }
 
+function load() {
+ const currentUrl = window.location.href;
+ const params = new URLSearchParams(currentUrl.split("?")[1]);
+ const username = params.get("username");
+ const password = params.get("password");
 
-
+ axios.get(`http://localhost:5000/data2`)
+  .then(response => {
+   const threedData = response.data.threed;
+   const loader = new THREE.ObjectLoader();
+   const object = loader.parse(JSON.parse(threedData));
+   
+   // Clear the scene
+   while (scene.children.length > 0) {
+    scene.remove(scene.children[0]);
+   }
+   
+   scene.add(object);
+  })
+  .catch(error => {
+   console.log('Error retrieving threed field data:', error);
+  });
+}
 
 createFloor()
 createBox()
@@ -315,4 +343,5 @@ createCylinder()
 createCastle()
 
 save()
+load()
 animate()
