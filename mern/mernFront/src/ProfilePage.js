@@ -31,7 +31,7 @@ const ProfilePage = () => {
           <li className="instruction">You can click on any object and move them around.</li>
           <li className="instruction">Use the scroll wheel to zoom in and out.</li>
           <li className="instruction">To resize the objects use (1 to 9) keys after clickig on them.</li>
-          <li className="instruction">Feel free to add objects with top left menu.</li>
+          <li className="instruction">Feel free to add objects with top right menu.</li>
           <li className="instruction">Use Delete key to delete the object.</li>
           <li className="instruction">Use the save button to save progress.</li>
           <li className="instruction">Use the load button to load the previous progress.</li>
