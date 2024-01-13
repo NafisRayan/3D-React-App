@@ -1,0 +1,239 @@
+/* Reset and Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: black;
+    color: white;
+    background-image: url('https://wallpaperaccess.com/full/3492868.gif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+}
+
+/* Header Styles */
+header {
+    background-color: rgb(9, 9, 44);
+    padding: 10px;
+    text-align: center;
+    background-image: url('https://wallpaperaccess.com/full/7270387.gif');
+    background-size: 100%;
+
+}
+
+/* Navigation Styles */
+nav {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px; /* Padding for spacing and clickable area */
+    margin: 0 10px; /* Space between links */
+    transition: border-bottom 0.3s ease-in-out;
+}
+
+nav a:hover {
+    border-bottom: 2px solid white;
+}
+/* Section Styles */
+section {
+    padding: 20px;
+}
+
+/* Form Container Styles */
+.form-container {
+    max-width: 400px; /* Updated width */
+    margin: auto;
+    background-color: #3f018fa1;
+    
+    background-image: url('https://wallpaperaccess.com/full/3564210.jpg');
+
+     padding: 60px; /* Adjusted padding for 3 times bigger */
+    border-radius: 10px; /* Updated border-radius */
+    margin-top: 20px;
+    border: 10px solid #000000; /* Added border */
+    box-shadow: 0 0 10px rgb(255, 255, 255); /* Added box shadow for a subtle effect */
+}
+
+/* Input and Button Styles */
+input,
+button {
+    margin: 10px 0; /* Updated margin */
+    padding: 12px; /* Adjusted padding for 3 times bigger */
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1.5em; /* Adjusted font size */
+    box-sizing: border-box;
+    font-size: 1.5em; /* Adjusted font size */
+    border: 1px solid #000000; /* Added border */
+   
+}
+
+button {
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: darkred;
+}
+
+
+/* Animation Container Styles */
+#animation-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    overflow: hidden;
+}
+
+/* Centered Content Styles */
+.centered-content {
+    text-align: center;
+    animation: fadeInUp 1s ease-in-out; /* Merged with animation styles */
+}
+
+.centered-content h1 {
+    font-size: 2em;
+}
+
+.centered-content p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+/* Keyframes Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Display None for Sections */
+#login, #signup, #home {
+    display: none;
+}
+
+/* Add these styles to your existing stylesheet */
+
+/* Updated Home Container Styles */
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0e0e0e3b;
+    /* background-image: url('https://wallpaperaccess.com/full/3564210.jpg'); */
+    background-size: cover;
+    color: #fff;
+    height: calc(100vh - 30vh);
+    width: 80vw;
+    margin: 0 auto;  /* This centers the container horizontally */
+    opacity: 0.66; /* Set the desired opacity value */
+}
+
+/* Updated Home Content Styles */
+.home-content {
+    text-align: center;
+    max-width: 800px;
+    /* margin-top: 30vh */
+}
+
+/* Updated wow Title Styles */
+.wow-title {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #5032da; /* Hot Pink color */
+    font-family: 'Press Start 2P', cursive; /* Stylish gaming font */
+}
+
+/* Updated wow Text Styles */
+.wow-text {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    font-family: 'Roboto', sans-serif; /* Use a readable font */
+}
+
+/* ProfilePage.css */
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.profile-header {
+  background-color: rgb(9, 9, 44);
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-size: 2em;
+}
+
+.profile-content {
+  background-color: #3f018fa1;
+  padding: 40px;
+  border-radius: 10px;
+  margin-top: 20px;
+  border: 2px solid #000000;
+  box-shadow: 0 0 10px rgb(255, 255, 255);
+}
+
+.profile-info {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.logout-button {
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1.5em;
+  transition: background-color 0.3s ease-in-out;
+  margin-top: 20px;
+  width: 200px;
+}
+
+.logout-button:hover {
+  background-color: darkred;
+}
+
+
+
+.instruction-list {
+  font-size: 30px; /* Adjust the font size as desired */
+}
+
+
+
+.instruction {
+  margin-bottom: 10px; /* Add margin-bottom to create spaces between list items */
+}
+
+.external-link-button {
+  background-color: red;
+}
